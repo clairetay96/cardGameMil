@@ -10,7 +10,7 @@ The game ends when there are fewer cards left in the deck than players at the st
 
 ### How to run this game
 
-Requires node version ^20 to run.
+**Requires at least node version 18 to run.**
 
 To play this game, run the following command in this directory:
 
