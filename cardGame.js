@@ -10,7 +10,6 @@ const rl = readline.createInterface({
 });
 
 async function runGame () {
-    // Get input of number of players
     let noOfPlayers = Number(await rl.question('How many players are playing?: '));
 
     while (isNaN(noOfPlayers) || !Number.isInteger(noOfPlayers) || noOfPlayers < 2 || noOfPlayers > 100) {
@@ -26,7 +25,7 @@ async function runGame () {
         const roundScoreBoard = new ScoreBoard(noOfPlayers)
         for (let playerNo = 1; playerNo <= noOfPlayers; playerNo++) {
             const playerDrawsCard = await rl.question(`Does player ${playerNo} want to draw a card? (Y/N): `);
-            
+
             if (playerDrawsCard.toUpperCase() === 'N') {
                 console.log(`Player ${playerNo} has skipped their turn!`);
                 continue;
@@ -40,19 +39,16 @@ async function runGame () {
             }
         }
 
-        // list of indexes of round winner(s)
         const roundWinners = roundScoreBoard.getWinnersPlayerNos()
         roundWinners.forEach((roundWinner) => {
             gameScoreBoard.addScoreForPlayer(roundWinner, 1)
         }) 
 
-        // Must +1 to the index of the player when printing, as the playerDisplayNumbers start from 1, not 0
         console.log(`Player(s) ${roundWinners} has won round ${roundNumber} \n`)
         roundNumber += 1
     }
 
     gameScoreBoard.sortAndPrint()
-    // Must +1 to the index of the player when printing, as the playerDisplayNumbers start from 1, not 0
     console.log(`Player(s) ${gameScoreBoard.getWinnersPlayerNos()} won the game`)
 }
 
